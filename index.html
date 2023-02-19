@@ -12,38 +12,143 @@
   <style>
     .attribution { font-size: 11px; text-align: center; }
     .attribution a { color: hsl(228, 45%, 44%); }
+
+    body {
+      background-color: rgba(20,21,25,255);
+      color: white;
+    }
+    .ratingContainer {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      background-color: rgba(30,37,47,255);
+      height: 22em;
+      width: 22em;
+      border-radius: 2em;
+    }
+    .ratingPage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+    }
+    .hidden {
+      display: none;
+    }
+    .img {
+      border-radius: 50%;
+      background-color: rgba(38,47,56,255);
+      width: 3em;
+      height: 3em;
+      margin: 0 20px 5px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .stars {
+      display: flex;
+      padding: 0 20px 0 20px;
+    }
+    .star {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(38,47,56,255);
+      color: white;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      margin: 15px auto 15px auto;
+    }
+    .star:hover {
+      background-color: hsl(25, 97%, 53%);
+      color: white;
+    }
+    h1, p, button {
+      margin-left: 25px;
+      margin-right: 25px;
+    }
+    p, .star {
+      color: rgba(100,109,118,255);
+    }
+    h1, p {
+      margin-top: 10px;
+      margin-bottom: 0;
+    }
+    button {
+      border-radius: 3em;
+      background-color: hsl(25, 97%, 53%);
+      height: 3em;
+      color: white;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: white;
+      color: hsl(25, 97%, 53%);
+    }
   </style>
 </head>
 <body>
+  <main>
 
-  <!-- Rating state start -->
+    <!-- Rating state start -->
+    <div class="ratingPage">
+      <div class="ratingContainer">
+        <div class="img">
+          <img alt="star" src="images/icon-star.svg">
+        </div>
+        <h1>
+          How did we do?
+        </h1>
+        <p>
+          Please let us know how we did with your support request. All feedback is appreciated 
+          to help us improve our offering!
+        </p>
+        <div class="stars">
+          <span class="star">1</span>
+          <span class="star">2</span>
+          <span class="star">3</span>
+          <span class="star">4</span>
+          <span class="star">5</span>
+        </div>
+        <button class="submitButton btn-primary btn">
+          <strong>
+            S U B M I T
+          </strong> 
+        </button>
+      </div>
+    </div>
 
-  How did we do?
 
-  Please let us know how we did with your support request. All feedback is appreciated 
-  to help us improve our offering!
 
-  1 2 3 4 5
 
-  Submit
+    <!-- Rating state end -->
 
-  <!-- Rating state end -->
+    <!-- Thank you state start -->
+    <div class="hidden">
+      You selected <!-- Add rating here --> out of 5
+    
+      Thank you!
+    
+      We appreciate you taking the time to give a rating. If you ever need more support, 
+      don’t hesitate to get in touch!
+    
+      <!-- Thank you state end -->
+    </div>
+  </main>
+  <footer>
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Your Name Here</a>.
+    </div>
+  </footer>
 
-  <!-- Thank you state start -->
 
-  You selected <!-- Add rating here --> out of 5
-
-  Thank you!
-
-  We appreciate you taking the time to give a rating. If you ever need more support, 
-  don’t hesitate to get in touch!
-
-  <!-- Thank you state end -->
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div>
+  <script>
+    addEventListener("click", submitRating);
+    
+  </script>
 </body>
 </html>
