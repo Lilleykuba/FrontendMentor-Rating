@@ -16,6 +16,13 @@
     body {
       background-color: rgba(20,21,25,255);
       color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
     }
     .ratingContainer {
       display: flex;
@@ -25,14 +32,6 @@
       height: 22em;
       width: 22em;
       border-radius: 2em;
-    }
-    .ratingPage {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      width: 100%;
-      min-height: 100vh;
     }
     .hidden {
       display: none;
@@ -56,7 +55,6 @@
       justify-content: center;
       align-items: center;
       background-color: rgba(38,47,56,255);
-      color: white;
       border-radius: 50%;
       width: 50px;
       height: 50px;
@@ -66,7 +64,7 @@
       background-color: hsl(25, 97%, 53%);
       color: white;
     }
-    h1, p, button {
+    h1, p, input {
       margin-left: 25px;
       margin-right: 25px;
     }
@@ -77,16 +75,35 @@
       margin-top: 10px;
       margin-bottom: 0;
     }
-    button {
+    input {
       border-radius: 3em;
       background-color: hsl(25, 97%, 53%);
       height: 3em;
+      width: 85%;
       color: white;
       font-size: 1em;
     }
-    button:hover {
+    input:hover {
       background-color: white;
       color: hsl(25, 97%, 53%);
+    }
+    .thankYou {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+    .ratingCounter {
+      background-color: rgba(38,47,56,255);
+      color:hsl(25, 97%, 53%);
+      border-radius: 2em;
+      padding: 5px 20px 5px 20px;
+      margin-top: 20px;
+    }
+    h2 {
+      font-size: 0.8em;
+      margin: 0;
     }
   </style>
 </head>
@@ -94,8 +111,8 @@
   <main>
 
     <!-- Rating state start -->
-    <div class="ratingPage">
-      <div class="ratingContainer">
+    <div class="ratingContainer">
+      <div class="ratingFirst" id="ratingPage">
         <div class="img">
           <img alt="star" src="images/icon-star.svg">
         </div>
@@ -106,37 +123,31 @@
           Please let us know how we did with your support request. All feedback is appreciated 
           to help us improve our offering!
         </p>
-        <div class="stars">
-          <span class="star">1</span>
-          <span class="star">2</span>
-          <span class="star">3</span>
-          <span class="star">4</span>
-          <span class="star">5</span>
+        <form id="ratingForm">
+          <div class="stars">
+            <span class="star">1</span>
+            <span class="star">2</span>
+            <span class="star">3</span>
+            <span class="star">4</span>
+            <span class="star">5</span>
+          </div>
+          <input type="button" class="submitButton" onclick="submitRating()" value="S U B M I T">
+        </form>
+      </div>
+      <div id="thankYou" class="hidden">
+        <div class="thankYou">
+          <img src="images/illustration-thank-you.svg">
+          <div class="ratingCounter">
+            <h2 id="h2"></h2>
+          </div>
+          <h1>
+            Thank you!
+          </h1>
+          <p>We appreciate you taking the time to give a rating. If you ever need more support, don’t hesitate to get in touch!</p>
         </div>
-        <button class="submitButton btn-primary btn">
-          <strong>
-            S U B M I T
-          </strong> 
-        </button>
       </div>
     </div>
-
-
-
-
     <!-- Rating state end -->
-
-    <!-- Thank you state start -->
-    <div class="hidden">
-      You selected <!-- Add rating here --> out of 5
-    
-      Thank you!
-    
-      We appreciate you taking the time to give a rating. If you ever need more support, 
-      don’t hesitate to get in touch!
-    
-      <!-- Thank you state end -->
-    </div>
   </main>
   <footer>
     <div class="attribution">
@@ -147,8 +158,28 @@
 
 
   <script>
-    addEventListener("click", submitRating);
+    let rating = 0;
+    let star = document.getElementsByClassName("star")
     
+    for (let i = 0; i < star.length; i++) {
+      star[i].addEventListener("mouseover", () => {
+        rating = document.getElementsByClassName("star")[i].innerText;
+        for (let j = 0; j < star.length; j++) {
+          document.getElementsByClassName("star")[j].style.backgroundColor = "rgba(38,47,56,255)";
+          document.getElementsByClassName("star")[j].style.color = "rgba(100,109,118,255)";
+        }
+        document.getElementsByClassName("star")[i].style.backgroundColor = "hsl(25, 97%, 53%)";
+        document.getElementsByClassName("star")[i].style.color = "white";
+        document.getElementsByClassName("star")[i-1].style.backgroundColor = "hsl(216, 12%, 54%)";
+        document.getElementsByClassName("star")[i-1].style.color = "white";
+      });
+    }
+
+    function submitRating() {
+      document.getElementById("thankYou").classList.toggle("hidden");
+      document.getElementById("ratingPage").classList.toggle("hidden");
+      document.getElementById("h2").innerText = "You selected " + rating + " out of 5."
+    };
   </script>
 </body>
 </html>
